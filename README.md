@@ -3,6 +3,11 @@
 A Power Apps component (PCF) for Dynamics 365 Contact Center that shows all
 WhatsApp conversations of a customer as **one continuous thread**.
 
+![The WhatsApp history tab on a Contact form: one thread with all conversations, newest first](docs/images/whatsapp-history-tab.png)
+
+*A "WhatsApp history" tab on a Contact form in the Copilot Service workspace. The
+conversations shown are demo data.*
+
 ## The problem
 
 For a customer, WhatsApp is one continuous conversation, even when it runs for
@@ -40,8 +45,12 @@ Contact, Case, and Conversation forms:
 3. Select **Publish all customizations**.
 
 The solution adds the control and three anchor columns, one each on Contact,
-Case, and Conversation. It does not change any form. To update, import the newer
-version over the old one and publish.
+Case, and Conversation. It does not change any form: you add the control to the
+forms yourself (next section).
+
+To update, import the newer version and choose **Update** (not **Upgrade**), then
+publish all customizations. Choosing Upgrade is only safe when you never used a
+version older than 1.7.0, because those versions shipped their own form layer.
 
 ## Add the control to a form
 
