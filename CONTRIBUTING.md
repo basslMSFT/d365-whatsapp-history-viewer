@@ -27,8 +27,9 @@ Issues and pull requests are welcome.
 By contributing you agree that your contribution is licensed under the MIT
 License of this repository.
 
-## Standard forms in the solution
+## The solution has no forms
 
-The solution contains the standard Contact, Case, and Conversation forms with
-the viewer already placed on them. If you change the forms, remove components
-that belong to your own environment first. See `scripts/strip_foreign_components.py`.
+The release package contains the control and three anchor columns, and no
+forms. Forms exported from a development environment depend on every app
+installed there. After exporting, run `python scripts\prepare_core_package.py`
+on the unpacked source. See "Build the package to share" in the README.

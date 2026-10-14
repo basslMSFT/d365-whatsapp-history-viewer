@@ -7,7 +7,7 @@ from auth import get_credential, load_env
 from PowerPlatform.Dataverse.client import DataverseClient
 
 
-SOLUTION_VERSION = "1.6.0.0"
+SOLUTION_VERSION = "1.7.0.0"
 
 
 def get_publisher_id() -> str:
