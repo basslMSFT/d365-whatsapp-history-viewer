@@ -33,10 +33,20 @@ The thread scrolls inside the control. The control fills the available height
 of the form and adapts to the width it is given. Give the form cell the full
 section width (3 columns); version 1.4 does this on the standard forms.
 
-Adaptive cards sent during the conversation (for example suggested replies) are
-rendered read-only: text, containers, columns, fact sets, images, tables and
-links are displayed, and buttons are shown as non-interactive labels. Only
-`http(s)` links and images are rendered.
+## Message types
+
+| In the transcript | In the control |
+| --- | --- |
+| Text, emoji, line breaks | Shown as sent. Links are clickable and `*bold*`, `_italic_`, `~strikethrough~` and ` ```monospace``` ` follow WhatsApp formatting. |
+| Photos | Shown inline. Click a photo to open it full size in a new tab. |
+| Video, audio and voice notes, PDFs and other files | Listed with a button; the file is only downloaded when you click it. Files over 25 MB aren't loaded. If the browser blocks the player, a download link is shown. |
+| Adaptive cards | Shown read-only. Buttons are labels; only `http` and `https` links work. |
+| Bot cards (hero, thumbnail, video, audio, animation) and suggested replies | Shown read-only as cards. Video and audio are linked, not loaded automatically. |
+| Contact Center context events, control messages, private notes | Not shown. |
+
+Files are read from the notes (annotations) of the conversation, so
+representatives need read access to Notes. SVG files are offered as a download
+and are never displayed inline.
 
 The first version intentionally reads closed conversation transcripts. The live
 communication panel remains the source for the currently active conversation.
@@ -92,7 +102,7 @@ previous PCF bundle even though the solution version increased. Increase the
 control version in `ControlManifest.Input.xml` and the solution version for
 every change, then verify the deployed `customcontrol.version`.
 
-Version 1.5 contains three unique anchor columns and preconfigures the control
+Version 1.6 contains three unique anchor columns and preconfigures the control
 on these standard main forms:
 
 | Table | Anchor column | Forms | Customer mapping |

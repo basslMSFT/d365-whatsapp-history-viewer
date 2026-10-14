@@ -8,7 +8,7 @@
     <Descriptions>
       <Description description="Unified chronological WhatsApp conversation history for Dynamics 365 Contact Center representatives." languagecode="1033" />
     </Descriptions>
-    <Version>1.5.1.0</Version>
+    <Version>1.6.0.0</Version>
     <Managed>0</Managed>
     <Publisher>
       <UniqueName>NLDrivePublisher</UniqueName>
@@ -167,21 +167,21 @@
       <MissingDependency>
         <Required type="10" schemaName="msdyn_incident_msdyn_workorder_ServiceRequest" displayName="msdyn_incident_msdyn_workorder_ServiceRequest" parentSchemaName="incident" parentDisplayName="Case" solution="FieldService (8.8.0.88)">
           <package appName="Field Service" version="8.8.144.50">FieldService_Anchor (8.8.144.50)</package>
-          <package appName="Dynamics 365 for Field Service" version="8.8.147.60">FieldService_Anchor (8.8.147.60)</package>
+          <package appName="Dynamics 365 for Field Service" version="8.8.149.350">FieldService_Anchor (8.8.149.350)</package>
         </Required>
         <Dependent type="60" displayName="Case" parentDisplayName="Case" id="{4a63c8d1-6c1e-48ec-9db4-3e6c7155334c}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="10" schemaName="msdyn_msdyn_functionallocation_incident_FunctionalLocation" displayName="msdyn_msdyn_functionallocation_incident_FunctionalLocation" parentSchemaName="msdyn_functionallocation" parentDisplayName="Functional Location" solution="msdyn_FieldService_patch_update (8.8.149.348)">
+        <Required type="10" schemaName="msdyn_msdyn_functionallocation_incident_FunctionalLocation" displayName="msdyn_msdyn_functionallocation_incident_FunctionalLocation" parentSchemaName="msdyn_functionallocation" parentDisplayName="Functional Location" solution="msdyn_FieldService_patch_update (8.8.149.350)">
           <package appName="Field Service" version="8.8.144.50">FieldService_Anchor (8.8.144.50)</package>
-          <package appName="Dynamics 365 for Field Service" version="8.8.147.60">FieldService_Anchor (8.8.147.60)</package>
+          <package appName="Dynamics 365 for Field Service" version="8.8.149.350">FieldService_Anchor (8.8.149.350)</package>
         </Required>
         <Dependent type="60" displayName="Case" parentDisplayName="Case" id="{4a63c8d1-6c1e-48ec-9db4-3e6c7155334c}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="10" schemaName="msdyn_msdyn_incidenttype_incident_IncidentType" displayName="msdyn_msdyn_incidenttype_incident_IncidentType" parentSchemaName="msdyn_incidenttype" parentDisplayName="Incident Type" solution="FieldService (8.8.0.88)">
           <package appName="Field Service" version="8.8.144.50">FieldService_Anchor (8.8.144.50)</package>
-          <package appName="Dynamics 365 for Field Service" version="8.8.147.60">FieldService_Anchor (8.8.147.60)</package>
+          <package appName="Dynamics 365 for Field Service" version="8.8.149.350">FieldService_Anchor (8.8.149.350)</package>
         </Required>
         <Dependent type="60" displayName="Case" parentDisplayName="Case" id="{4a63c8d1-6c1e-48ec-9db4-3e6c7155334c}" />
       </MissingDependency>
@@ -516,16 +516,16 @@
         <Dependent type="60" displayName="Active Conversation" parentDisplayName="Conversation" id="{5fe86453-73ea-4821-b6dd-ddc06e1755a1}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="2" schemaName="msdyn_functionallocation" displayName="Functional Location" parentSchemaName="incident" parentDisplayName="Case" solution="msdyn_FieldService_patch_update (8.8.149.348)">
+        <Required type="2" schemaName="msdyn_functionallocation" displayName="Functional Location" parentSchemaName="incident" parentDisplayName="Case" solution="msdyn_FieldService_patch_update (8.8.149.350)">
           <package appName="Field Service" version="8.8.144.50">FieldService_Anchor (8.8.144.50)</package>
-          <package appName="Dynamics 365 for Field Service" version="8.8.147.60">FieldService_Anchor (8.8.147.60)</package>
+          <package appName="Dynamics 365 for Field Service" version="8.8.149.350">FieldService_Anchor (8.8.149.350)</package>
         </Required>
         <Dependent type="60" displayName="Case" parentDisplayName="Case" id="{4a63c8d1-6c1e-48ec-9db4-3e6c7155334c}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="2" schemaName="msdyn_incidenttype" displayName="Incident Type" parentSchemaName="incident" parentDisplayName="Case" solution="FieldService (8.8.0.88)">
           <package appName="Field Service" version="8.8.144.50">FieldService_Anchor (8.8.144.50)</package>
-          <package appName="Dynamics 365 for Field Service" version="8.8.147.60">FieldService_Anchor (8.8.147.60)</package>
+          <package appName="Dynamics 365 for Field Service" version="8.8.149.350">FieldService_Anchor (8.8.149.350)</package>
         </Required>
         <Dependent type="60" displayName="Case" parentDisplayName="Case" id="{4a63c8d1-6c1e-48ec-9db4-3e6c7155334c}" />
       </MissingDependency>
@@ -549,7 +549,7 @@
         <Required type="2" schemaName="msdyn_primarytimezone" displayName="Primary Time Zone" parentSchemaName="contact" parentDisplayName="Contact" solution="msdyn_AssetCommon (1.0.3412.1)">
           <package appName="msdynce_Service" version="9.0.26085.1010">msdynce_ServiceAnchor (9.0.26085.1010)</package>
           <package appName="Field Service" version="8.8.144.50">FieldService_Anchor (8.8.144.50)</package>
-          <package appName="Dynamics 365 for Field Service" version="8.8.147.60">FieldService_Anchor (8.8.147.60)</package>
+          <package appName="Dynamics 365 for Field Service" version="8.8.149.350">FieldService_Anchor (8.8.149.350)</package>
         </Required>
         <Dependent type="60" displayName="Contact" parentDisplayName="Contact" id="{1fed44d1-ae68-4a41-bd2b-f13acac4acfa}" />
       </MissingDependency>
@@ -1146,28 +1146,28 @@
       <MissingDependency>
         <Required type="61" schemaName="msdyn_/Case/Case.Library.js" displayName="msdyn_/Case/Case.Library.js" solution="FieldService (8.8.0.88)">
           <package appName="Field Service" version="8.8.144.50">FieldService_Anchor (8.8.144.50)</package>
-          <package appName="Dynamics 365 for Field Service" version="8.8.147.60">FieldService_Anchor (8.8.147.60)</package>
+          <package appName="Dynamics 365 for Field Service" version="8.8.149.350">FieldService_Anchor (8.8.149.350)</package>
         </Required>
         <Dependent type="60" displayName="Case" parentDisplayName="Case" id="{4a63c8d1-6c1e-48ec-9db4-3e6c7155334c}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="61" schemaName="msdyn_/CFS/Case/CaseForm.js" displayName="msdyn_/CFS/Case/CaseForm.js" solution="ConnectedFieldService (1.8.53.0)">
           <package appName="Field Service" version="8.8.144.50">FieldService_Anchor (8.8.144.50)</package>
-          <package appName="Dynamics 365 for Field Service" version="8.8.147.60">FieldService_Anchor (8.8.147.60)</package>
+          <package appName="Dynamics 365 for Field Service" version="8.8.149.350">FieldService_Anchor (8.8.149.350)</package>
         </Required>
         <Dependent type="60" displayName="Case" parentDisplayName="Case" id="{4a63c8d1-6c1e-48ec-9db4-3e6c7155334c}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="61" schemaName="msdyn_/CFS/Utils/RibbonUtils.js" displayName="msdyn_/CFS/Utils/RibbonUtils.js" solution="ConnectedFieldService (1.8.53.0)">
           <package appName="Field Service" version="8.8.144.50">FieldService_Anchor (8.8.144.50)</package>
-          <package appName="Dynamics 365 for Field Service" version="8.8.147.60">FieldService_Anchor (8.8.147.60)</package>
+          <package appName="Dynamics 365 for Field Service" version="8.8.149.350">FieldService_Anchor (8.8.149.350)</package>
         </Required>
         <Dependent type="60" displayName="Case" parentDisplayName="Case" id="{4a63c8d1-6c1e-48ec-9db4-3e6c7155334c}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="61" schemaName="msdyn_/Contact/Contact.Library.js" displayName="msdyn_/Contact/Contact.Library.js" solution="FieldService (8.8.0.88)">
           <package appName="Field Service" version="8.8.144.50">FieldService_Anchor (8.8.144.50)</package>
-          <package appName="Dynamics 365 for Field Service" version="8.8.147.60">FieldService_Anchor (8.8.147.60)</package>
+          <package appName="Dynamics 365 for Field Service" version="8.8.149.350">FieldService_Anchor (8.8.149.350)</package>
         </Required>
         <Dependent type="60" displayName="Contact" parentDisplayName="Contact" id="{1fed44d1-ae68-4a41-bd2b-f13acac4acfa}" />
       </MissingDependency>
@@ -1329,7 +1329,7 @@
         <Required type="66" schemaName="MscrmControls.DeviceInsights.DeviceInsightsControl" displayName="MscrmControls.DeviceInsights.DeviceInsightsControl" solution="IoTConnector (1.8.53.0)">
           <package appName="msdynce_Service" version="9.0.26085.1010">msdynce_ServiceAnchor (9.0.26085.1010)</package>
           <package appName="Field Service" version="8.8.144.50">FieldService_Anchor (8.8.144.50)</package>
-          <package appName="Dynamics 365 for Field Service" version="8.8.147.60">FieldService_Anchor (8.8.147.60)</package>
+          <package appName="Dynamics 365 for Field Service" version="8.8.149.350">FieldService_Anchor (8.8.149.350)</package>
         </Required>
         <Dependent type="60" displayName="Case" parentDisplayName="Case" id="{4a63c8d1-6c1e-48ec-9db4-3e6c7155334c}" />
       </MissingDependency>

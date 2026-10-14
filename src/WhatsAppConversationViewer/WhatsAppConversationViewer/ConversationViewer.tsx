@@ -1,10 +1,12 @@
 import * as React from "react";
 import { AdaptiveCardView } from "./AdaptiveCardView";
+import { AttachmentView } from "./AttachmentView";
 import {
     listWhatsAppConversations,
     loadConversation,
     loadCustomerName,
 } from "./ConversationService";
+import { renderMessageText } from "./MessageText";
 import { Conversation, ConversationMessage, ConversationSummary } from "./models";
 
 export interface IConversationViewerProps {
@@ -85,8 +87,15 @@ function formatTime(value: Date | undefined): string {
     }).format(value);
 }
 
-function MessageBubble({ message }: { message: ConversationMessage }): React.ReactElement {
+function MessageBubble({
+    message,
+    webApi,
+}: {
+    message: ConversationMessage;
+    webApi: ComponentFramework.WebApi;
+}): React.ReactElement {
     const directionClass = `wacv-message--${message.direction}`;
+    const hasMedia = message.cards.length > 0 || message.attachments.length > 0;
     return (
         <div className={`wacv-message ${directionClass}`}>
             <div className="wacv-message__meta">
@@ -95,14 +104,19 @@ function MessageBubble({ message }: { message: ConversationMessage }): React.Rea
                     {formatTime(message.timestamp)}
                 </time>
             </div>
-            <div
-                className={`wacv-message__bubble${
-                    message.cards.length > 0 ? " wacv-message__bubble--card" : ""
-                }`}
-            >
-                {message.text}
+            <div className={`wacv-message__bubble${hasMedia ? " wacv-message__bubble--card" : ""}`}>
+                {message.text && (
+                    <div className="wacv-message__text">{renderMessageText(message.text)}</div>
+                )}
                 {message.cards.map((card, index) => (
                     <AdaptiveCardView card={card} key={`${message.id}-card-${index}`} />
+                ))}
+                {message.attachments.map((attachment) => (
+                    <AttachmentView
+                        attachment={attachment}
+                        key={`${message.id}-${attachment.id}`}
+                        webApi={webApi}
+                    />
                 ))}
             </div>
         </div>
@@ -409,6 +423,7 @@ export const ConversationViewer: React.FC<IConversationViewerProps> = (props) =>
                                 <MessageBubble
                                     key={`${conversation.id}-${message.id}`}
                                     message={message}
+                                    webApi={webApi}
                                 />
                             ))}
                         </React.Fragment>

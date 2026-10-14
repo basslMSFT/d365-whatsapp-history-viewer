@@ -10,7 +10,7 @@
     color: #242424;
     display: flex;
     flex-direction: column;
-    font-family: "Segoe UI", sans-serif;
+    font-family: "Segoe UI", "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
     min-width: 0;
     overflow: hidden;
     width: 100%;
@@ -159,7 +159,27 @@
     line-height: 1.4;
     overflow-wrap: anywhere;
     padding: 8px 10px;
+}
+
+.wacv-message__text {
     white-space: pre-wrap;
+}
+
+.wacv-message__text a,
+.wacv-message__text code {
+    overflow-wrap: anywhere;
+}
+
+.wacv-message__text a {
+    color: #0f6cbd;
+}
+
+.wacv-message__text code {
+    background: rgb(0 0 0 / 6%);
+    border-radius: 3px;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 0.92em;
+    padding: 0 3px;
 }
 
 .wacv-message--representative .wacv-message__bubble {
@@ -174,7 +194,78 @@
 
 .wacv-message__bubble--card {
     min-width: min(280px, 100%);
-    white-space: normal;
+}
+
+.wacv-message__text + .wacv-card,
+.wacv-message__text + .wacv-attachment,
+.wacv-card + .wacv-attachment,
+.wacv-attachment + .wacv-attachment {
+    margin-top: 6px;
+}
+
+.wacv-attachment {
+    max-width: 100%;
+}
+
+.wacv-attachment__image,
+.wacv-attachment__video {
+    border-radius: 6px;
+    display: block;
+    max-height: 320px;
+    max-width: 100%;
+}
+
+.wacv-attachment__image {
+    cursor: zoom-in;
+    object-fit: contain;
+}
+
+.wacv-attachment__video {
+    background: #000000;
+    width: 100%;
+}
+
+.wacv-attachment__audio {
+    display: block;
+    max-width: 100%;
+    width: 280px;
+}
+
+.wacv-attachment__caption {
+    color: #616161;
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+.wacv-attachment__chip {
+    background: rgb(0 0 0 / 5%);
+    border: 1px solid rgb(0 0 0 / 12%);
+    border-radius: 14px;
+    box-sizing: border-box;
+    color: inherit;
+    display: inline-block;
+    font: inherit;
+    font-size: 12px;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    padding: 4px 12px;
+    text-decoration: none;
+}
+
+.wacv-attachment__chip--button,
+.wacv-attachment__chip--link {
+    color: var(--wacv-accent);
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.wacv-attachment__chip--button:hover,
+.wacv-attachment__chip--link:hover {
+    background: rgb(0 0 0 / 9%);
+}
+
+.wacv-attachment__chip--error {
+    color: #a4262c;
 }
 
 .wacv-card {

@@ -2,8 +2,18 @@ export type MessageDirection = "customer" | "representative" | "system" | "unkno
 
 export type AdaptiveCardPayload = Record<string, unknown>;
 
+export interface MessageAttachment {
+    // Dataverse note (annotation) that stores the file; missing when the
+    // transcript doesn't reference one.
+    annotationId?: string;
+    contentType: string;
+    id: string;
+    name: string;
+}
+
 export interface ConversationMessage {
     id: string;
+    attachments: MessageAttachment[];
     author: string;
     cards: AdaptiveCardPayload[];
     direction: MessageDirection;
