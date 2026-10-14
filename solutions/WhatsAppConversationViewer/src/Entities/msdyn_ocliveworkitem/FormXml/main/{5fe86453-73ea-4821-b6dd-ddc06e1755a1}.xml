@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{5fe86453-73ea-4821-b6dd-ddc06e1755a1}</formid>
+    <IntroducedVersion>1.2.3.10</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form maxWidth="1920" showImage="false" shownavigationbar="true" headerdensity="HighWithControls" solutionaction="Modified">
+      <tabs>
+        <tab name="Details" id="{76ca05d2-8b46-cd2b-b341-33ae1a7db900}" IsUserDefined="0" locklevel="0" showlabel="true" expanded="true" ordinalvalue="0">
+          <columns>
+            <column width="34%" id="0">
+              <sections>
+                <section name="tab_2_section_1" showlabel="false" showbar="false" locklevel="0" id="{d1560609-0cc5-0eb7-ea14-2b69a6cbb46b}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left" ordinalvalue="0">
+                  <rows>
+                    <row>
+                      <cell id="{468d451a-90d3-2dee-ccce-72b21ec611c9}" showlabel="false" locklevel="0" ordinalvalue="10001" solutionaction="Modified" />
+                    </row>
+                    <row>
+                      <cell id="{3d4ed768-9ee2-213c-a6ab-7e5763be74c4}" showlabel="false" colspan="1" auto="false" visible="false" ordinalvalue="10002" solutionaction="Modified" />
+                    </row>
+                    <row>
+                      <cell id="{3aa8d3d2-7463-4bfa-8025-7118bf528dda}" locklevel="0" colspan="1" rowspan="1" visible="false" ordinalvalue="10003" solutionaction="Modified" />
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="33%" id="1">
+              <sections>
+                <section name="Details_section_3" showlabel="false" showbar="false" locklevel="0" id="{1a9dd166-a374-3cad-40cb-b4c04a53901b}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left" ordinalvalue="1" solutionaction="Modified">
+                  <rows>
+                    <row>
+                      <cell id="{ebeb2c93-80cb-04e4-3783-de1597b434d7}" showlabel="false" locklevel="0" ordinalvalue="10000">
+                        <labels>
+                          <label description="Issue" languagecode="1033" solutionaction="Added" />
+                          <label description="Probleem" languagecode="1043" solutionaction="Added" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="proactive_engagement_section" showlabel="true" showbar="false" locklevel="0" id="{f47c8a12-3b9f-d4e6-81ab-c2f45d7e9a34}" IsUserDefined="1" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left" visible="false" ordinalvalue="2" solutionaction="Modified" />
+                <section name="Details_section_4" showlabel="true" showbar="false" locklevel="0" id="{2a95271e-aed4-8966-5350-e6c584912627}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left" ordinalvalue="3" solutionaction="Modified" />
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab name="nldrive_whatsapphistory" id="{B804B20D-826A-4B34-B1EB-19559ED97B2C}" IsUserDefined="1" locklevel="0" showlabel="true" expanded="true" ordinalvalue="3" solutionaction="Added">
+          <labels>
+            <label description="WhatsApp history" languagecode="1033" />
+            <label description="WhatsApp-historie" languagecode="1043" />
+          </labels>
+          <columns>
+            <column width="100%" id="0">
+              <sections>
+                <section name="nldrive_whatsapphistory_section" id="{2470D736-AB5A-4225-8F80-C135569E9433}" IsUserDefined="1" locklevel="0" showlabel="false" showbar="false" columns="111" ordinalvalue="0">
+                  <labels>
+                    <label description="WhatsApp history" languagecode="1033" />
+                    <label description="WhatsApp-historie" languagecode="1043" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{759785EF-2EDD-433F-9A2E-5D73DEBEAE60}" showlabel="false" locklevel="0" colspan="3" rowspan="20" auto="true" ordinalvalue="10000">
+                        <labels>
+                          <label description="WhatsApp history" languagecode="1033" />
+                          <label description="WhatsApp-historie" languagecode="1043" />
+                        </labels>
+                        <control id="nldrive_conversationwhatsappvieweranchor" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="nldrive_conversationwhatsappvieweranchor" disabled="false" uniqueid="{2E37731C-A872-458E-B6A6-553722C99871}" />
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row height="auto" />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <Navigation>
+        <NavBar />
+      </Navigation>
+      <controlDescriptions>
+        <controlDescription forControl="{2E37731C-A872-458E-B6A6-553722C99871}" solutionaction="Added">
+          <customControl id="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}">
+            <parameters>
+              <datafieldname>nldrive_conversationwhatsappvieweranchor</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="nldrive_NLDrive.ContactCenter.WhatsAppConversationViewer">
+            <parameters>
+              <anchor>nldrive_conversationwhatsappvieweranchor</anchor>
+              <customer type="Lookup.Simple">msdyn_customer</customer>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="nldrive_NLDrive.ContactCenter.WhatsAppConversationViewer">
+            <parameters>
+              <anchor>nldrive_conversationwhatsappvieweranchor</anchor>
+              <customer type="Lookup.Simple">msdyn_customer</customer>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="nldrive_NLDrive.ContactCenter.WhatsAppConversationViewer">
+            <parameters>
+              <anchor>nldrive_conversationwhatsappvieweranchor</anchor>
+              <customer type="Lookup.Simple">msdyn_customer</customer>
+            </parameters>
+          </customControl>
+        </controlDescription>
+      </controlDescriptions>
+      <footer id="{5a5c8f1c-1dd4-4a9b-8743-df1a4ab500dc}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left" solutionaction="Added">
+        <rows />
+      </footer>
+    </form>
+    <LocalizedNames>
+      <LocalizedName description="Active Conversation" languagecode="1033" />
+      <LocalizedName description="Actief gesprek" languagecode="1043" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="Active Conversation form for omnichannel" languagecode="1033" />
+      <Description description="Actief gespreksformulier voor omnichannel" languagecode="1043" />
+    </Descriptions>
+  </systemform>
+</forms>

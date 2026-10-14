@@ -1,0 +1,15 @@
+.env
+.vscode/settings.json
+.claude/mcp_settings.json
+.token_cache.bin
+*.snk
+__pycache__/
+*.pyc
+scripts/foreign_components.local.json
+temp/
+solutions/*.zip
+node_modules/
+out/
+bin/
+obj/
+*.pcfproj.user

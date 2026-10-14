@@ -1,0 +1,11 @@
+{
+  "columns": {
+    "contoso_examplecolumn": "contoso_ExampleColumn"
+  },
+  "web_resources": [
+    "contoso_examplewebresource"
+  ],
+  "option_sets": [
+    "contoso_exampleoptionset"
+  ]
+}
