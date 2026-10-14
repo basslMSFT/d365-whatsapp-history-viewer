@@ -5,6 +5,7 @@ import {
     TranscriptAnnotation,
     TranscriptRecord,
 } from "./models";
+import { normalizeGuid } from "./guid";
 import { parseTranscript } from "./TranscriptParser";
 
 const LIVE_CONVERSATION_ENTITY = "msdyn_ocliveworkitem";
@@ -14,11 +15,6 @@ const WHATSAPP_CHANNEL = "192300000";
 const MAX_CONVERSATION_QUERY = 100;
 const FORMATTED_VALUE =
     "@OData.Community.Display.V1.FormattedValue";
-
-function cleanGuid(value: string): string {
-    return value.replace(/[{}]/g, "").trim();
-}
-
 function asDate(value: string | undefined): Date | undefined {
     if (!value) {
         return undefined;
@@ -46,12 +42,12 @@ export async function loadCustomerName(
     webApi: ComponentFramework.WebApi,
     contactId: string
 ): Promise<string> {
+    const id = normalizeGuid(contactId);
+    if (!id) {
+        return "";
+    }
     try {
-        const contact = await webApi.retrieveRecord(
-            "contact",
-            cleanGuid(contactId),
-            "?$select=fullname"
-        );
+        const contact = await webApi.retrieveRecord("contact", id, "?$select=fullname");
         const name = contact.fullname as unknown;
         return typeof name === "string" ? name : "";
     } catch {
@@ -63,9 +59,13 @@ async function loadTranscript(
     webApi: ComponentFramework.WebApi,
     conversationId: string
 ): Promise<{ annotation: TranscriptAnnotation; transcript: TranscriptRecord } | undefined> {
+    const safeConversationId = normalizeGuid(conversationId);
+    if (!safeConversationId) {
+        return undefined;
+    }
     const transcriptOptions =
         "?$select=msdyn_transcriptid,_msdyn_liveworkitemidid_value,createdon" +
-        `&$filter=_msdyn_liveworkitemidid_value eq ${conversationId}` +
+        `&$filter=_msdyn_liveworkitemidid_value eq ${safeConversationId}` +
         "&$orderby=createdon desc&$top=1";
     const transcriptResponse = await webApi.retrieveMultipleRecords(
         TRANSCRIPT_ENTITY,
@@ -75,13 +75,14 @@ async function loadTranscript(
     const transcript = transcriptResponse.entities[0] as
         | TranscriptRecord
         | undefined;
-    if (!transcript?.msdyn_transcriptid) {
+    const transcriptId = normalizeGuid(transcript?.msdyn_transcriptid);
+    if (!transcript || !transcriptId) {
         return undefined;
     }
 
     const annotationOptions =
         "?$select=annotationid,createdon,documentbody,subject" +
-        `&$filter=_objectid_value eq ${transcript.msdyn_transcriptid}&$top=1`;
+        `&$filter=_objectid_value eq ${transcriptId}&$top=1`;
     const annotationResponse = await webApi.retrieveMultipleRecords(
         ANNOTATION_ENTITY,
         annotationOptions,
@@ -106,7 +107,7 @@ export async function listWhatsAppConversations(
     historyMonths: number,
     maximumConversations: number
 ): Promise<ConversationSummary[]> {
-    const normalizedCustomerId = cleanGuid(customerId);
+    const normalizedCustomerId = normalizeGuid(customerId);
     if (!normalizedCustomerId) {
         return [];
     }
@@ -137,7 +138,7 @@ export async function listWhatsAppConversations(
         .filter((record) => String(record.msdyn_channel) === WHATSAPP_CHANNEL)
         .slice(0, limit)
         .map((record): ConversationSummary | undefined => {
-            const id = record.activityid ?? record.msdyn_ocliveworkitemid;
+            const id = normalizeGuid(record.activityid ?? record.msdyn_ocliveworkitemid);
             if (!id) {
                 return undefined;
             }

@@ -113,8 +113,8 @@ control makes. Photos and files are read from Notes.
 | --- | --- |
 | Text, emoji, line breaks | Shown as sent. Links are clickable and `*bold*`, `_italic_`, `~strikethrough~` and ` ```monospace``` ` follow WhatsApp formatting. |
 | Photos | Shown inline. Click a photo to open it full size in a new tab. |
-| Video, audio and voice notes, PDFs and other files | Listed with a button; the file is only downloaded when you click it. Files over 25 MB aren't loaded. If the browser blocks the player, a download link is shown. |
-| Adaptive cards | Shown read-only. Buttons are labels; only `http` and `https` links work. |
+| Video, audio and voice notes, PDFs and other files | Listed with a button; the file is only downloaded when you click it. Files over 25 MB aren't loaded. If the browser blocks the player, a download link is shown. Files other than photos, video and audio are downloaded with a neutral type, and file names that look executable (`.exe`, `.html`, `.js`, ...) get `.txt` appended. The control doesn't scan files for malware. |
+| Adaptive cards | Shown read-only, and only for messages from the bot or a representative, never for what a customer sent. Buttons are labels; only `http` and `https` links work, and the real address is shown next to each link. Images in a card load only after you click them, so opening a conversation doesn't contact third-party servers. |
 | Bot cards (hero, thumbnail, video, audio, animation) and suggested replies | Shown read-only as cards. Video and audio are linked, not loaded automatically. |
 | Contact Center context events, control messages, private notes | Not shown. |
 

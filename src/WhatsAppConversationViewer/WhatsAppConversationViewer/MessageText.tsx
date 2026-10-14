@@ -5,8 +5,13 @@ import * as React from "react";
 const PATTERN =
     /(https?:\/\/[^\s<]*[^\s<.,;:!?)\]'"\u2019\u201D])|(```[\s\S]+?```)|(^|[\s([{])([*_~])(?=\S)([^\n]*?\S)\4(?=$|[\s.,;:!?)\]}])/g;
 const MAX_DEPTH = 2;
+// The patterns can get slow on very long input; plain text is always safe.
+const MAX_FORMATTED_LENGTH = 8000;
 
 export function renderMessageText(text: string, depth = 0): React.ReactNode[] {
+    if (text.length > MAX_FORMATTED_LENGTH) {
+        return [text];
+    }
     const nodes: React.ReactNode[] = [];
     const push = (node: React.ReactNode): void => {
         nodes.push(<React.Fragment key={nodes.length}>{node}</React.Fragment>);

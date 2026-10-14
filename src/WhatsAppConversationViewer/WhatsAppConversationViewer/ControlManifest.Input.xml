@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="NLDrive.ContactCenter" constructor="WhatsAppConversationViewer" version="1.6.0" display-name-key="Control_Display_Name" description-key="Control_Description" control-type="virtual">
+  <control namespace="NLDrive.ContactCenter" constructor="WhatsAppConversationViewer" version="1.6.1" display-name-key="Control_Display_Name" description-key="Control_Description" control-type="virtual">
     <external-service-usage enabled="false" />
     <property name="anchor" display-name-key="Anchor_Display_Name" description-key="Anchor_Description" of-type="SingleLine.Text" usage="bound" required="true" />
     <property name="customer" display-name-key="Customer_Display_Name" description-key="Customer_Description" of-type="Lookup.Simple" usage="input" required="false" />

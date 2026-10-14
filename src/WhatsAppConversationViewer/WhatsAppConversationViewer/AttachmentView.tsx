@@ -1,4 +1,5 @@
 import * as React from "react";
+import { normalizeGuid } from "./guid";
 import { MessageAttachment } from "./models";
 
 type Status = "idle" | "loading" | "ready" | "failed" | "toolarge";
@@ -38,6 +39,48 @@ function formatSize(bytes: number | undefined): string {
         : `${Math.max(1, Math.round(bytes / 1024))} KB`;
 }
 
+const RISKY_EXTENSIONS = new Set([
+    "apk", "app", "bat", "cmd", "com", "cpl", "dll", "docm", "exe", "hta", "htm", "html", "iso", "jar",
+    "js", "jse", "lnk", "mht", "mhtml", "msi", "pif", "ps1", "pptm", "reg", "scr", "sh", "svg", "vbe",
+    "vbs", "wsf", "xhtml", "xlsm",
+]);
+const FILE_NAME_FORBIDDEN = /[\\/:*?"<>|]/g;
+const MAX_FILE_NAME = 120;
+
+function isStrippedChar(code: number): boolean {
+    return (
+        code < 32 ||
+        (code >= 127 && code <= 159) ||
+        code === 0x200e ||
+        code === 0x200f ||
+        (code >= 0x202a && code <= 0x202e) ||
+        (code >= 0x2066 && code <= 0x2069)
+    );
+}
+
+// The name comes from the customer. Control and direction-override characters are
+// removed so the extension can't be disguised, and path characters can't be smuggled in.
+function safeFileName(name: string | undefined, fallback: string): string {
+    let cleaned = "";
+    for (const char of name ?? "") {
+        if (!isStrippedChar(char.charCodeAt(0))) {
+            cleaned += char;
+        }
+    }
+    cleaned = cleaned.replace(FILE_NAME_FORBIDDEN, "_").trim();
+    while (cleaned.startsWith(".")) {
+        cleaned = cleaned.slice(1);
+    }
+    return cleaned.slice(0, MAX_FILE_NAME).trim() || fallback;
+}
+
+// Files that could run or script when opened get a harmless extension appended.
+function downloadName(name: string): string {
+    const dot = name.lastIndexOf(".");
+    const extension = dot >= 0 ? name.slice(dot + 1).toLowerCase() : "";
+    return RISKY_EXTENSIONS.has(extension) ? `${name}.txt` : name;
+}
+
 function base64ToBlob(base64: string, type: string): Blob {
     const binary = atob(base64);
     const bytes = new Uint8Array(binary.length);
@@ -64,8 +107,8 @@ export const AttachmentView: React.FC<IAttachmentViewProps> = ({ attachment, web
     const urlRef = React.useRef<string>();
     const mountedRef = React.useRef(true);
     const kind = kindOf(contentType);
-    const name = attachment.name || KIND_LABELS[kind];
-    const { annotationId } = attachment;
+    const name = safeFileName(attachment.name, KIND_LABELS[kind]);
+    const annotationId = normalizeGuid(attachment.annotationId) || undefined;
 
     const load = React.useCallback(async (): Promise<void> => {
         if (!annotationId) {
@@ -99,7 +142,9 @@ export const AttachmentView: React.FC<IAttachmentViewProps> = ({ attachment, web
                 throw new Error("De bijlage bevat geen bestand.");
             }
             const resolvedType = typeof mime === "string" && mime ? mime : attachment.contentType;
-            const blobUrl = URL.createObjectURL(base64ToBlob(body, resolvedType));
+            // Only known media types keep their type; anything else is a neutral download.
+            const blobType = kindOf(resolvedType) === "file" ? "application/octet-stream" : resolvedType;
+            const blobUrl = URL.createObjectURL(base64ToBlob(body, blobType));
             if (!mountedRef.current) {
                 URL.revokeObjectURL(blobUrl);
                 return;
@@ -130,9 +175,14 @@ export const AttachmentView: React.FC<IAttachmentViewProps> = ({ attachment, web
     }, [annotationId]);
 
     const download = url && (
-        <a className="wacv-attachment__chip wacv-attachment__chip--link" download={name} href={url}>
-            {name} · Downloaden
-        </a>
+        <>
+            <a className="wacv-attachment__chip wacv-attachment__chip--link" download={downloadName(name)} href={url}>
+                {name} · Downloaden
+            </a>
+            <div className="wacv-attachment__caption">
+                Niet gescand op virussen. Open alleen bestanden die je vertrouwt.
+            </div>
+        </>
     );
 
     return (

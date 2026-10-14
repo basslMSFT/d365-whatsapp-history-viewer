@@ -4,8 +4,25 @@ import { AdaptiveCardPayload } from "./models";
 type CardNode = Record<string, unknown>;
 
 const MAX_DEPTH = 8;
+// The inline pattern can get slow on very long input; plain text is always safe.
+const MAX_FORMATTED_LENGTH = 8000;
 const INLINE_PATTERN = /(\*\*[^*]+\*\*|\[[^\]]+\]\(https?:\/\/[^)\s]+\))/g;
 const LINK_PATTERN = /^\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)$/;
+
+// Card values end up in CSS class names, so only known values are used. Adaptive Cards
+// write them capitalized ("Bolder"); the style sheet uses the canonical spelling below.
+const SIZES = ["small", "default", "medium", "large", "extraLarge"];
+const WEIGHTS = ["lighter", "default", "bolder"];
+const COLORS = ["default", "dark", "light", "accent", "good", "warning", "attention"];
+const ALIGNMENTS = ["left", "center", "right"];
+const SPACINGS = ["none", "small", "default", "medium", "large", "extraLarge", "padding"];
+const STYLES = ["default", "emphasis", "good", "attention", "warning", "accent"];
+const IMAGE_SIZES = ["auto", "stretch", "small", "medium", "large"];
+
+function pick(value: string | undefined, allowed: string[], fallback: string): string {
+    const wanted = (value ?? "").toLowerCase();
+    return allowed.find((candidate) => candidate.toLowerCase() === wanted) ?? fallback;
+}
 
 function isNode(value: unknown): value is CardNode {
     return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -43,14 +60,30 @@ function safeUrl(url: string | undefined, allowDataImage: boolean): string | und
     return undefined;
 }
 
+// A link label can say anything, so the real host is shown next to it.
+function hostOf(url: string): string {
+    try {
+        return new URL(url).hostname;
+    } catch {
+        return "";
+    }
+}
+
 function renderInline(value: string): React.ReactNode[] {
+    if (value.length > MAX_FORMATTED_LENGTH) {
+        return [value];
+    }
     return value.split(INLINE_PATTERN).map((part, index) => {
         const link = LINK_PATTERN.exec(part);
         if (link) {
+            const host = hostOf(link[2]);
             return (
-                <a key={index} href={link[2]} rel="noopener noreferrer" target="_blank">
-                    {link[1]}
-                </a>
+                <React.Fragment key={index}>
+                    <a href={link[2]} rel="noopener noreferrer" target="_blank">
+                        {link[1]}
+                    </a>
+                    {host && !link[1].includes(host) && <span className="wacv-card__host"> ({host})</span>}
+                </React.Fragment>
             );
         }
         if (part.startsWith("**") && part.endsWith("**") && part.length > 4) {
@@ -60,14 +93,32 @@ function renderInline(value: string): React.ReactNode[] {
     });
 }
 
+// Remote images are not fetched until the representative asks for them, so opening a
+// conversation never tells a third party that, when, and from where it was read.
+const ExternalImage: React.FC<{ alt: string; className: string; url: string }> = ({ alt, className, url }) => {
+    const [shown, setShown] = React.useState(url.startsWith("data:"));
+    if (shown) {
+        return <img alt={alt} className={className} loading="lazy" referrerPolicy="no-referrer" src={url} />;
+    }
+    return (
+        <button
+            className="wacv-attachment__chip wacv-attachment__chip--button"
+            onClick={() => setShown(true)}
+            type="button"
+        >
+            Afbeelding van {hostOf(url)} laden
+        </button>
+    );
+};
+
 function textClasses(node: CardNode): string {
     return cx(
         "wacv-card__text",
-        `wacv-card__text--size-${text(node, "size") ?? "default"}`,
-        `wacv-card__text--weight-${text(node, "weight") ?? "default"}`,
-        `wacv-card__text--color-${text(node, "color") ?? "default"}`,
+        `wacv-card__text--size-${pick(text(node, "size"), SIZES, "default")}`,
+        `wacv-card__text--weight-${pick(text(node, "weight"), WEIGHTS, "default")}`,
+        `wacv-card__text--color-${pick(text(node, "color"), COLORS, "default")}`,
         node.isSubtle === true && "wacv-card__text--subtle",
-        `wacv-card__text--align-${text(node, "horizontalAlignment") ?? "left"}`
+        `wacv-card__text--align-${pick(text(node, "horizontalAlignment"), ALIGNMENTS, "left")}`
     );
 }
 
@@ -90,8 +141,10 @@ function renderActions(actions: CardNode[], key: string): React.ReactNode {
                         key={index}
                         rel="noopener noreferrer"
                         target="_blank"
+                        title={href}
                     >
                         {title}
+                        <span className="wacv-card__host"> ({hostOf(href)})</span>
                     </a>
                 ) : (
                     <span aria-disabled="true" className="wacv-card__action" key={index}>
@@ -188,7 +241,7 @@ function renderElement(node: CardNode, key: string, depth: number): React.ReactN
     const wrapperClass = cx(
         "wacv-card__element",
         node.separator === true && "wacv-card__element--separator",
-        `wacv-card__element--spacing-${text(node, "spacing") ?? "default"}`
+        `wacv-card__element--spacing-${pick(text(node, "spacing"), SPACINGS, "default")}`
     );
     let content: React.ReactNode = null;
 
@@ -202,11 +255,10 @@ function renderElement(node: CardNode, key: string, depth: number): React.ReactN
         case "Image": {
             const source = safeUrl(text(node, "url"), true);
             content = source ? (
-                <img
+                <ExternalImage
                     alt={text(node, "altText") ?? ""}
-                    className={`wacv-card__image wacv-card__image--${text(node, "size") ?? "auto"}`}
-                    loading="lazy"
-                    src={source}
+                    className={`wacv-card__image wacv-card__image--${pick(text(node, "size"), IMAGE_SIZES, "auto")}`}
+                    url={source}
                 />
             ) : null;
             break;
@@ -220,7 +272,7 @@ function renderElement(node: CardNode, key: string, depth: number): React.ReactN
             break;
         case "Container":
             content = (
-                <div className={cx("wacv-card__container", `wacv-card__container--${text(node, "style") ?? "default"}`)}>
+                <div className={cx("wacv-card__container", `wacv-card__container--${pick(text(node, "style"), STYLES, "default")}`)}>
                     {renderChildren(nodes(node, "items"), key, depth)}
                 </div>
             );

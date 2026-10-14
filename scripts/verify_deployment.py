@@ -65,8 +65,8 @@ def main() -> None:
 
     control = controls[0]
     version = control.get("version", "unknown")
-    if version != "1.6.0":
-        raise RuntimeError(f"Expected control version 1.6.0, found {version}")
+    if version != "1.6.1":
+        raise RuntimeError(f"Expected control version 1.6.1, found {version}")
     print(
         f"Verified PCF control: {control['name']} "
         f"version {version} "

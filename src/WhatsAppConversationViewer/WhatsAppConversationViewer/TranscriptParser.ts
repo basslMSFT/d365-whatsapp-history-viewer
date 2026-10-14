@@ -1,3 +1,4 @@
+import { normalizeGuid } from "./guid";
 import { ConversationMessage, MessageAttachment, MessageDirection } from "./models";
 
 type JsonObject = Record<string, unknown>;
@@ -267,6 +268,10 @@ function interpretContent(message: JsonObject, direction: MessageDirection): Int
     }
 
     const plain = cleanText(getString(message, TEXT_KEYS) ?? "");
+    // Cards come from the bot or channel. Whatever the customer sent is only text and files.
+    if (direction === "customer") {
+        return { cards: [], text: plain };
+    }
     const cards = cardsFromAttachments(getValue(message, "attachments"), plain);
     if (cards.length === 0) {
         const fallback = parseEmbeddedJson(getValue(message, "adaptiveCardText"));
@@ -315,7 +320,7 @@ function extractAttachments(message: JsonObject): MessageAttachment[] {
             return;
         }
         const name = getString(entry, ["name", "fileName"]) ?? "";
-        const annotationId = getString(entry, ["annotationid"]);
+        const annotationId = normalizeGuid(getString(entry, ["annotationid"])) || undefined;
         if (!name && !annotationId) {
             return;
         }
