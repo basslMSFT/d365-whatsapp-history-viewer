@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="Control_Display_Name" xml:space="preserve"><value>Samengestelde WhatsApp-conversatie</value></data>
+  <data name="Control_Description" xml:space="preserve"><value>Toont losse Contact Center-transcripts als een chronologische WhatsApp-conversatie.</value></data>
+  <data name="Anchor_Display_Name" xml:space="preserve"><value>Ankerveld</value></data>
+  <data name="Anchor_Description" xml:space="preserve"><value>Tekstkolom waarop de control wordt geplaatst. Er wordt geen waarde opgeslagen.</value></data>
+  <data name="Customer_Display_Name" xml:space="preserve"><value>Klant</value></data>
+  <data name="Customer_Description" xml:space="preserve"><value>Contactpersoon of account waarvan de WhatsApp-historie wordt getoond.</value></data>
+  <data name="Entity_Id_Display_Name" xml:space="preserve"><value>Record-id</value></data>
+  <data name="Entity_Id_Description" xml:space="preserve"><value>Record-id van het huidige formulier, gebruikt als klant-id op Contactformulieren.</value></data>
+  <data name="Entity_Name_Display_Name" xml:space="preserve"><value>Tabelnaam</value></data>
+  <data name="Entity_Name_Description" xml:space="preserve"><value>Logische naam van de huidige formuliertabel.</value></data>
+  <data name="History_Months_Display_Name" xml:space="preserve"><value>Historie in maanden</value></data>
+  <data name="History_Months_Description" xml:space="preserve"><value>Aantal maanden dat wordt geladen. Standaard 12 en maximaal 60.</value></data>
+  <data name="Maximum_Conversations_Display_Name" xml:space="preserve"><value>Maximum aantal gesprekken</value></data>
+  <data name="Maximum_Conversations_Description" xml:space="preserve"><value>Maximum aantal technische conversations om samen te voegen. Standaard 50.</value></data>
+  <data name="Page_Size_Display_Name" xml:space="preserve"><value>Gesprekken per keer</value></data>
+  <data name="Page_Size_Description" xml:space="preserve"><value>Aantal gesprekken dat per keer wordt geladen. Bij naar beneden scrollen worden er meer geladen. Standaard 3, maximaal 20.</value></data>
+  <data name="Height_Display_Name" xml:space="preserve"><value>Hoogte in pixels</value></data>
+  <data name="Height_Description" xml:space="preserve"><value>Vaste hoogte van de control. Laat leeg om de beschikbare ruimte van het formulier te vullen; de conversatie scrolt binnen de control.</value></data>
+  <data name="Sort_Order_Display_Name" xml:space="preserve"><value>Sortering</value></data>
+  <data name="Sort_Order_Description" xml:space="preserve"><value>Volgorde van gesprekken en berichten. Standaard nieuwste eerst.</value></data>
+  <data name="Sort_Newest_First_Display_Name" xml:space="preserve"><value>Nieuwste eerst</value></data>
+  <data name="Sort_Newest_First_Description" xml:space="preserve"><value>Nieuwste gesprek en bericht bovenaan. Oudere gesprekken laden bij naar beneden scrollen.</value></data>
+  <data name="Sort_Oldest_First_Display_Name" xml:space="preserve"><value>Oudste eerst</value></data>
+  <data name="Sort_Oldest_First_Description" xml:space="preserve"><value>Chronologische volgorde, oudste bovenaan. Nieuwere gesprekken laden bij naar beneden scrollen.</value></data>
+  <data name="Show_System_Messages_Display_Name" xml:space="preserve"><value>Systeemberichten tonen</value></data>
+  <data name="Show_System_Messages_Description" xml:space="preserve"><value>Neem openbare systeemberichten op in de samengestelde tijdlijn.</value></data>
+</root>
