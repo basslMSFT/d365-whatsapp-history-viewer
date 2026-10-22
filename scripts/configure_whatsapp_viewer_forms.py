@@ -10,7 +10,6 @@ sys.path.insert(0, os.path.dirname(__file__))
 from auth import get_token, load_env
 
 
-SOLUTION_NAME = "WhatsAppConversationViewer"
 CONTROL_NAME = "bassllab_BasslLabs.ContactCenter.WhatsAppConversationViewer"
 TEXT_CONTROL_ID = "{4273EDBD-AC1D-40d3-9FB2-095C621B552D}"
 
@@ -287,26 +286,6 @@ def patch_form(
     print(f"Configured: {configuration['table']} - {form['name']}")
 
 
-def add_form_to_solution(
-    environment_url: str,
-    headers: dict[str, str],
-    form_id: str,
-) -> None:
-    response = requests.post(
-        f"{environment_url}/api/data/v9.2/AddSolutionComponent",
-        headers={**headers, "Content-Type": "application/json"},
-        json={
-            "ComponentId": form_id,
-            "ComponentType": 60,
-            "SolutionUniqueName": SOLUTION_NAME,
-            "AddRequiredComponents": False,
-            "DoNotIncludeSubcomponents": True,
-        },
-        timeout=120,
-    )
-    response.raise_for_status()
-
-
 def publish_tables(
     environment_url: str,
     headers: dict[str, str],
@@ -355,7 +334,6 @@ def main() -> None:
                     f"{form['name']}"
                 )
             patch_form(environment_url, headers, form, configuration)
-            add_form_to_solution(environment_url, headers, str(form["formid"]))
 
     publish_tables(environment_url, headers)
     print("Published Contact, Case, and Conversation forms.")
